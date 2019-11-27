@@ -52,3 +52,9 @@ body {
 form{
     margin: 0px 16px;
 }
+
+/* Extra CSS for forms */
+button[type="submit"]{
+  background-color: #FF3333;
+  color: #fff;
+}
