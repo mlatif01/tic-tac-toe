@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { SignupComponent } from './user/signup/signup.component';
 import { LoginComponent } from './user/login/login.component';
+import { UserService } from './shared/user.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { LoginComponent } from './user/login/login.component';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
