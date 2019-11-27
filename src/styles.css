@@ -24,11 +24,24 @@ body {
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
 }
 
+p, h2 {
+  text-align: center;
+}
+
+.mx-auto {
+  margin: 20px;
+}
+
 /* Form */
-div.form-group.required > label:first-child:after{
+div.form-group.required > label:first-child:after {
   content:'*';
   color: #dc3545;
   padding-left: 5px;
+}
+
+div.form-group label:not(.text-danger) {
+  color: #303b3b;
+  font-weight: 700;
 }
 
 /* Tabs */
@@ -56,12 +69,12 @@ div.form-group.required > label:first-child:after{
     outline: none;
 }
 
-form{
-    margin: 0px 16px;
+form {
+    margin: 0px 20px;
 }
 
 /* Extra CSS for forms */
-button[type="submit"]{
+button[type="submit"] {
   background-color: #FF3333;
   color: #fff;
 }

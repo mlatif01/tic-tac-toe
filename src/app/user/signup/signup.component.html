@@ -1,14 +1,18 @@
 <form [formGroup]="service.formModel" autocomplete="off">
     <img src="/assets/user2.png" class="mx-auto d-block">
-    <h1>User Sign Up</h1>
+    <h2>User Sign Up</h2>
     <p><em>Sign Up To Play Tic Tac Toe!</em></p>
   <div class="form-group required">
     <label >Email</label>
     <input class="form-control" formControlName="Email">
+    <label class="text-danger" *ngIf="!!service.formModel.get('Email').touched && service.formModel.get('Email').errors?.email">Email is invalid</label>
+    <label class="text-danger" *ngIf="!!service.formModel.get('Email').touched && service.formModel.get('Email').errors?.required">Email is required</label>
   </div>
   <div class="form-group required">
     <label >Password</label>
     <input class="form-control" formControlName="Password">
+    <label class="text-danger" *ngIf="!!service.formModel.get('Password').touched && service.formModel.get('Password').errors?.required">Password is required</label>
+    <label class="text-danger" *ngIf="!!service.formModel.get('Password').touched && service.formModel.get('Password').errors?.minlength">Minimum 8 characters required</label>
   </div>
   <div class="form-row">
     <div class="form-group col-md-8 offset-md-2">
