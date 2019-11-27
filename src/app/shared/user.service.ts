@@ -8,7 +8,7 @@ export class UserService {
 
   constructor(private formBuilder: FormBuilder) { }
 
-  formModel = this.formBuilder({
+  formModel = this.formBuilder.group({
     Email: ['', Validators.required],
     Password: ['', Validators.required, Validators.minLength(8)]
   })
