@@ -9,6 +9,9 @@ import { SignupComponent } from './user/signup/signup.component';
 import { LoginComponent } from './user/login/login.component';
 import { UserService } from './shared/user.service';
 import { HomeComponent } from './home/home.component';
+import { GameComponent } from './game/game.component';
+import { BoardComponent } from './game/board/board.component';
+import { CellComponent } from './game/cell/cell.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { HomeComponent } from './home/home.component';
     UserComponent,
     SignupComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    GameComponent,
+    BoardComponent,
+    CellComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,8 @@ import { UserComponent } from './user/user.component';
 import { SignupComponent } from './user/signup/signup.component';
 import { LoginComponent } from './user/login/login.component';
 import { HomeComponent } from './home/home.component';
+import { BoardComponent } from './game/board/board.component';
+import { CellComponent } from './game/cell/cell.component';
 
 
 const routes: Routes = [
@@ -13,7 +15,15 @@ const routes: Routes = [
     {path: 'signup', component: SignupComponent}, // user/signup
     {path: 'login', component: LoginComponent}    // user/login
   ]},
-  {path: 'home', component: HomeComponent}
+  {path: 'home', component: HomeComponent,
+    children: [
+      {path: 'board', component: BoardComponent,
+        children: [
+          {path: 'cell', component: CellComponent}
+        ]
+      }
+    ]
+  }
 ];
 
 @NgModule({
