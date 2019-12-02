@@ -10,7 +10,7 @@
   </div>
   <div class="form-group required">
     <label >Password</label>
-    <input class="form-control" formControlName="Password">
+    <input type="password" class="form-control" formControlName="Password">
     <label class="text-danger" *ngIf="!!service.formModel.get('Password').touched && service.formModel.get('Password').errors?.required">Password is required</label>
     <label class="text-danger" *ngIf="!!service.formModel.get('Password').touched && service.formModel.get('Password').errors?.minlength">Minimum 8 characters required</label>
   </div>
