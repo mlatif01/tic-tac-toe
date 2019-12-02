@@ -22,7 +22,7 @@ import { CellComponent } from './game/cell/cell.component';
     HomeComponent,
     GameComponent,
     BoardComponent,
-    CellComponent
+    CellComponent,
   ],
   imports: [
     BrowserModule,
