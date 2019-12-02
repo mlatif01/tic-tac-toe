@@ -15,13 +15,10 @@ const routes: Routes = [
     {path: 'signup', component: SignupComponent}, // user/signup
     {path: 'login', component: LoginComponent}    // user/login
   ]},
-  {path: 'home', component: HomeComponent,
+  {path: 'home', component: HomeComponent, // home
     children: [
-      {path: 'board', component: BoardComponent,
-        children: [
-          {path: 'cell', component: CellComponent}
-        ]
-      }
+      {path: 'board', component: BoardComponent},
+      {path: 'cell', component: CellComponent}
     ]
   }
 ];
