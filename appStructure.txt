@@ -9,6 +9,8 @@
 |   |  |
 |   +--• shared
 |   |  |--user.service.ts|.html
+|   +--•
+|   |  |--home.component.ts|.html
 |   |
 |   |--app.module.ts
 |   |--app-routing.module.ts (route configs)
