@@ -16,11 +16,9 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent}    // user/login
   ]},
   {path: 'home', component: HomeComponent, // home
-    children: [
-      {path: 'board', component: BoardComponent},
-      {path: 'cell', component: CellComponent}
-    ]
-  }
+  children: [
+    {path: 'game', component: BoardComponent}
+  ]}
 ];
 
 @NgModule({
