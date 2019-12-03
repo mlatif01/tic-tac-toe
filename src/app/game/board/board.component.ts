@@ -43,8 +43,9 @@ export class BoardComponent implements OnInit {
   }
 
   cpuMove(): void {
+    this.currentPlayer = CellEnum.O;
     // if CPU Turn - Wait 1 second then make move
-      if (this.currentPlayer === CellEnum.O && !this.isGameOver && !this.canPlayerMove) {
+    if (this.currentPlayer === CellEnum.O) {
         this.statusMessage = `CPU is thinking...`;
         this.delay(1000).then(any=>{
           // CPU MOVE LOGIC
@@ -52,13 +53,19 @@ export class BoardComponent implements OnInit {
             for (let col = 0; col < 3; col++) {
               if (this.board[row][col] === CellEnum.EMPTY) {
                 this.board[row][col] = CellEnum.O;
-                this.currentPlayer = CellEnum.X;
                 this.canPlayerMove = true;
-                this.statusMessage = `Player ${this.currentPlayer}'s turn`;
                 break;
               }
             }
             break;
+          }
+          // Check if cpu win
+          if (this.isWin()) {
+            this.statusMessage = `Player ${this.currentPlayer} won!`;
+            this.isGameOver = true;
+          } else {
+            this.currentPlayer = CellEnum.X;
+            this.statusMessage = `Player ${this.currentPlayer}'s turn!`
           }
     });
     }
@@ -73,12 +80,11 @@ export class BoardComponent implements OnInit {
       } else if (this.isWin()) {
         this.statusMessage = `Player ${this.currentPlayer} won!`;
         this.isGameOver = true;
-      } else if (this.canPlayerMove) {
-        this.currentPlayer = CellEnum.O;
+       } else if (this.canPlayerMove) {
         this.statusMessage = `Player ${this.currentPlayer}'s turn`;
         this.canPlayerMove = false;
+        this.cpuMove();
       }
-      this.cpuMove();
     }
   }
 
@@ -96,7 +102,6 @@ export class BoardComponent implements OnInit {
   isWin(): boolean {
     // horizontal
     for (const rows of this.board) {
-      console.log(rows);
       if (rows[0] === rows[1] && rows[0] === rows[2] && rows[0] !== CellEnum.EMPTY) {
         return true;
       }

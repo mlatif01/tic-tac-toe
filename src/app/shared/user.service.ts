@@ -12,4 +12,6 @@ export class UserService {
     Email: ['', [Validators.required, Validators.email]],
     Password: ['', [Validators.required, Validators.minLength(8)]]
   });
+
+  
 }
