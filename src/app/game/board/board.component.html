@@ -7,6 +7,7 @@
               [row]="row"
               [col]="col"
               [piece]="board[row][col]"
+              (click)="move(row, col)"
               >
     </app-cell>
   </div>
