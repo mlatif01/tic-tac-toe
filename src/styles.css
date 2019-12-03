@@ -123,3 +123,10 @@ button[type="submit"] {
 .new-game {
   width: 100%;
 }
+
+/* Game*/
+.game-app {
+  margin: 0 auto;
+  max-width: 300px;
+  color: #34495e;
+}

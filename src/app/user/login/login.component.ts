@@ -19,8 +19,6 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl('/home');
     }
     this.service.formModel.reset();
-    console.log("SHOULD RESET");
-
   }
 
 }

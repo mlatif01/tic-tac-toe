@@ -36,5 +36,67 @@ export class BoardComponent implements OnInit {
     this.statusMessage = `Player ${this.currentPlayer}'s turn`;
   }
 
+  move(row: number, col: number): void {
+    if (!this.isGameOver && this.board[row][col] === CellEnum.EMPTY) {
+      this.board[row][col] = this.currentPlayer;
+      if (this.isDraw()) {
+        this.statusMessage = 'It\'s a Draw!';
+        this.isGameOver = true;
+      } else if (this.isWin()) {
+        this.statusMessage = `Player ${this.currentPlayer} won!`;
+        this.isGameOver = true;
+      } else {
+        this.currentPlayer = this.currentPlayer === CellEnum.X ? CellEnum.O : CellEnum.X;
+      }
+    }
+  }
+
+  isDraw(): boolean {
+    for (const columns of this.board) {
+      for (const col of columns) {
+        if (col === CellEnum.EMPTY) {
+          return false;
+        }
+      }
+    }
+    return !this.isWin();
+  }
+
+  isWin(): boolean {
+    // horizontal
+    for (const columns of this.board) {
+      if (columns[0] === columns[1] && columns[0] === columns[2] && columns[0] !== CellEnum.EMPTY) {
+        return true;
+      }
+    }
+    // vertical
+    for (let col = 0; col < this.board[0].length; col++) {
+      if (
+        this.board[0][col] === this.board[1][col] &&
+        this.board[0][col] === this.board[2][col] &&
+        this.board[0][col] !== CellEnum.EMPTY
+      ) {
+        return true;
+      }
+    }
+    //diagonals
+    if (
+      this.board[0][0] === this.board[1][1] &&
+      this.board[0][0] === this.board[2][2] &&
+      this.board[0][0] !== CellEnum.EMPTY
+    ) {
+      return true;
+    }
+
+    if (
+      this.board[0][2] === this.board[1][1] &&
+      this.board[0][2] === this.board[2][2] &&
+      this.board[0][2] !== CellEnum.EMPTY
+    ) {
+      return true;
+    }
+    return false;
+  }
+
 
 }
