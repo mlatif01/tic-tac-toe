@@ -10,7 +10,7 @@ export class LoginComponent implements OnInit {
   formModel = {
     Email: '',
     Password: ''
-  }
+  };
 
   constructor() { }
 
