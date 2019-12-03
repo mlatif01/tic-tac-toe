@@ -13,5 +13,5 @@ export class UserService {
     Password: ['', [Validators.required, Validators.minLength(8)]]
   });
 
-  
+
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
+import { Auth } from 'aws-amplify';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -8,13 +10,19 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(public service: UserService) { }
+  constructor(public service: UserService, private router: Router) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    // do something on registration
+    Auth.signUp({
+      "username": this.service.formModel.value.Email,
+      "password":  this.service.formModel.value.Password
+    }).then((user: any) => {
+      this.service.formModel.reset();
+      this.router.navigateByUrl('/user/login');
+    });
   }
 
 }
