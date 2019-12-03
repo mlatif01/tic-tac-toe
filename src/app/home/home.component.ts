@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Auth from '@aws-amplify/auth';
 import { Hub } from 'aws-amplify';
+import { UserService } from '../shared/user.service';
 
 
 @Component({
@@ -13,16 +14,16 @@ export class HomeComponent implements OnInit {
 
   gameDetails;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private service: UserService) { }
 
   ngOnInit() {
-
+    this.service.isUserLoggedIn();
   }
 
   onLogout() {
     Auth.signOut()
-      .then(() => console.log("LOGGED OUT"));
-    this.router.navigate(['/user/login']);
+      .then(() => console.log('Logged Out'));
+    this.router.navigateByUrl('/user/login');
   }
 
 }

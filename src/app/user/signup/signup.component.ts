@@ -13,12 +13,18 @@ export class SignupComponent implements OnInit {
   constructor(public service: UserService, private router: Router) { }
 
   ngOnInit() {
+    Auth.currentAuthenticatedUser()
+    .then(() => {
+      this.router.navigateByUrl('/home');
+    })
+    .catch(() => {
+    });
   }
 
   onSubmit() {
     Auth.signUp({
-      "username": this.service.formModel.value.Email,
-      "password":  this.service.formModel.value.Password
+      'username': this.service.formModel.value.Email,
+      'password':  this.service.formModel.value.Password
     }).then((user: any) => {
       this.service.formModel.reset();
       this.router.navigateByUrl('/user/login');
