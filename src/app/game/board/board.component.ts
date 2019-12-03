@@ -12,6 +12,7 @@ export class BoardComponent implements OnInit {
   public board: CellEnum[][];
   private isGameOver: boolean;
   public statusMessage;
+  private canPlayerMove: boolean;
 
   constructor() { }
 
@@ -19,11 +20,16 @@ export class BoardComponent implements OnInit {
     this.newGame();
   }
 
+  async delay(ms: number) {
+    await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
+}
+
   get gameOver(): boolean {
     return this.isGameOver;
   }
 
   newGame() {
+    this.canPlayerMove = true;
     this.board = [];
     for (let row = 0; row < 3; row++) {
       this.board[row] = [];
@@ -36,8 +42,30 @@ export class BoardComponent implements OnInit {
     this.statusMessage = `Player ${this.currentPlayer}'s turn`;
   }
 
+  cpuMove(): void {
+    // if CPU Turn - Wait 1 second then make move
+      if (this.currentPlayer === CellEnum.O && !this.isGameOver && !this.canPlayerMove) {
+        this.statusMessage = `CPU is thinking...`;
+        this.delay(1000).then(any=>{
+          // CPU MOVE LOGIC
+          for (let row = 0; row < 3; row++) {
+            for (let col = 0; col < 3; col++) {
+              if (this.board[row][col] === CellEnum.EMPTY) {
+                this.board[row][col] = CellEnum.O;
+                this.currentPlayer = CellEnum.X;
+                this.canPlayerMove = true;
+                this.statusMessage = `Player ${this.currentPlayer}'s turn`;
+                break;
+              }
+            }
+            break;
+          }
+    });
+    }
+  }
+
   move(row: number, col: number): void {
-    if (!this.isGameOver && this.board[row][col] === CellEnum.EMPTY) {
+    if (!this.isGameOver && this.board[row][col] === CellEnum.EMPTY && this.canPlayerMove) {
       this.board[row][col] = this.currentPlayer;
       if (this.isDraw()) {
         this.statusMessage = 'It\'s a Draw!';
@@ -45,9 +73,12 @@ export class BoardComponent implements OnInit {
       } else if (this.isWin()) {
         this.statusMessage = `Player ${this.currentPlayer} won!`;
         this.isGameOver = true;
-      } else {
-        this.currentPlayer = this.currentPlayer === CellEnum.X ? CellEnum.O : CellEnum.X;
+      } else if (this.canPlayerMove) {
+        this.currentPlayer = CellEnum.O;
+        this.statusMessage = `Player ${this.currentPlayer}'s turn`;
+        this.canPlayerMove = false;
       }
+      this.cpuMove();
     }
   }
 
@@ -64,11 +95,13 @@ export class BoardComponent implements OnInit {
 
   isWin(): boolean {
     // horizontal
-    for (const columns of this.board) {
-      if (columns[0] === columns[1] && columns[0] === columns[2] && columns[0] !== CellEnum.EMPTY) {
+    for (const rows of this.board) {
+      console.log(rows);
+      if (rows[0] === rows[1] && rows[0] === rows[2] && rows[0] !== CellEnum.EMPTY) {
         return true;
       }
     }
+
     // vertical
     for (let col = 0; col < this.board[0].length; col++) {
       if (
@@ -79,7 +112,7 @@ export class BoardComponent implements OnInit {
         return true;
       }
     }
-    //diagonals
+    //diagonal
     if (
       this.board[0][0] === this.board[1][1] &&
       this.board[0][0] === this.board[2][2] &&
@@ -90,7 +123,7 @@ export class BoardComponent implements OnInit {
 
     if (
       this.board[0][2] === this.board[1][1] &&
-      this.board[0][2] === this.board[2][2] &&
+      this.board[0][2] === this.board[2][0] &&
       this.board[0][2] !== CellEnum.EMPTY
     ) {
       return true;
