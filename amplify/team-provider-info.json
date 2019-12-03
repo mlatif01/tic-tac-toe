@@ -1,0 +1,20 @@
+{
+    "angular": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-tic-tac-toe-angular-182320-authRole",
+            "UnauthRoleArn": "arn:aws:iam::171209842894:role/amplify-tic-tac-toe-angular-182320-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::171209842894:role/amplify-tic-tac-toe-angular-182320-authRole",
+            "Region": "eu-west-1",
+            "DeploymentBucketName": "amplify-tic-tac-toe-angular-182320-deployment",
+            "UnauthRoleName": "amplify-tic-tac-toe-angular-182320-unauthRole",
+            "StackName": "amplify-tic-tac-toe-angular-182320",
+            "StackId": "arn:aws:cloudformation:eu-west-1:171209842894:stack/amplify-tic-tac-toe-angular-182320/fd09a850-15f9-11ea-93a7-066a04218648",
+            "AmplifyAppId": "d29wmc8odttj4r"
+        },
+        "categories": {
+            "auth": {
+                "tictactoed1f38c0b": {}
+            }
+        }
+    }
+}
