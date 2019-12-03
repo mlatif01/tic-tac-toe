@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import Auth from '@aws-amplify/auth';
 
 @Component({
   selector: 'app-login',
@@ -13,14 +14,19 @@ export class LoginComponent implements OnInit {
   constructor(public service: UserService, private router: Router) { }
 
   ngOnInit() {
+    // if (Auth.currentSession() != null) {
+    //   this.router.navigateByUrl('/home');
+    //   console.log(Auth.currentSession());
+    // }
   }
 
-  onSubmit(form: NgForm) {
-    // do something on login
-    if (this.service.formModel.value.Email == "milad@latif.com" && this.service.formModel.value.Password == "miladlatif") {
+  onSubmit() {
+    Auth.signIn(this.service.formModel.value.Email, this.service.formModel.value.Password)
+    .then((user: any) => {
+      const jwt = user.signInUserSession.idToken.jwtToken;
+      console.log(jwt);
       this.router.navigateByUrl('/home');
-    }
-    this.service.formModel.reset();
+    });
   }
 
 }

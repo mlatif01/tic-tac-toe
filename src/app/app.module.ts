@@ -14,6 +14,8 @@ import { GameComponent } from './game/game.component';
 import { BoardComponent } from './game/board/board.component';
 import { CellComponent } from './game/cell/cell.component';
 
+import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,9 +31,10 @@ import { CellComponent } from './game/cell/cell.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AmplifyAngularModule
   ],
-  providers: [UserService],
+  providers: [UserService, AmplifyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
