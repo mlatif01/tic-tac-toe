@@ -1,4 +1,4 @@
-<form [formGroup]="service.formModel" autocomplete="off">
+<form #form="ngForm" [formGroup]="service.formModel" autocomplete="off">
     <img src="/assets/user2.png" class="mx-auto d-block">
     <h2>User Sign Up</h2>
     <p><em>Sign Up To Play Tic Tac Toe!</em></p>
@@ -16,7 +16,7 @@
   </div>
   <div class="form-row">
     <div class="form-group col-md-8 offset-md-2">
-      <button type="submit" class="btn btn-lg btn-block">Sign Up</button>
+      <button type="submit" class="btn btn-lg btn-block" [disabled]="form.invalid">Sign Up</button>
     </div>
   </div>
 </form>
