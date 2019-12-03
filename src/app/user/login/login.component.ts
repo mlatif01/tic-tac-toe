@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,14 +10,15 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginModel = {
-    Email: '',
-    Password: ''
-  };
-
-  constructor(public service: UserService) { }
+  constructor(public service: UserService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  onSubmit() {
+    if (this.service.formModel.value.Email == "milad@latif.com" && this.service.formModel.value.Password == "miladlatif") {
+      this.router.navigateByUrl('/home');
+    }
   }
 
 }
