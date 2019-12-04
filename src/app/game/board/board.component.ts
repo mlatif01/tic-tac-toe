@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CellEnum } from '../cell/cellEnum';
 import { CellComponent } from '../cell/cell.component';
+import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-board',
@@ -14,18 +15,22 @@ export class BoardComponent implements OnInit {
   public statusMessage;
   private canPlayerMove: boolean;
 
-  constructor() { }
+  constructor(private service: UserService) { }
 
   ngOnInit() {
     this.newGame();
   }
 
   async delay(ms: number) {
-    await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
+    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log('fired'));
 }
 
   get gameOver(): boolean {
     return this.isGameOver;
+  }
+
+  saveGame(gameState: string) {
+    this.service.postGame(gameState);
   }
 
   newGame() {
@@ -47,7 +52,7 @@ export class BoardComponent implements OnInit {
     // if CPU Turn - Wait 1 second then make move
     if (this.currentPlayer === CellEnum.O) {
         this.statusMessage = `CPU is thinking...`;
-        this.delay(1000).then(any=>{
+        this.delay(1000).then(() => {
           // CPU MOVE LOGIC
           for (let row = 0; row < 3; row++) {
             for (let col = 0; col < 3; col++) {
@@ -61,6 +66,7 @@ export class BoardComponent implements OnInit {
           }
           // Check if cpu win
           if (this.isWin()) {
+            this.saveGame('opponent');
             this.statusMessage = `Player ${this.currentPlayer} won!`;
             this.isGameOver = true;
           } else {
@@ -75,9 +81,11 @@ export class BoardComponent implements OnInit {
     if (!this.isGameOver && this.board[row][col] === CellEnum.EMPTY && this.canPlayerMove) {
       this.board[row][col] = this.currentPlayer;
       if (this.isDraw()) {
+        this.saveGame('draw');
         this.statusMessage = 'It\'s a Draw!';
         this.isGameOver = true;
       } else if (this.isWin()) {
+        this.saveGame('user');
         this.statusMessage = `Player ${this.currentPlayer} won!`;
         this.isGameOver = true;
        } else if (this.canPlayerMove) {

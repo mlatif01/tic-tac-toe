@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(public service: UserService, private router: Router) { }
 
+
   ngOnInit() {
     this.service.isUserLoggedIn();
   }
@@ -22,8 +23,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     Auth.signIn(this.service.formModel.value.Email, this.service.formModel.value.Password)
     .then((user: any) => {
-      const jwt = user.signInUserSession.idToken.jwtToken;
-      console.log(jwt);
+      console.log(user.signInUserSession.idToken.jwtToken);
       this.service.formModel.reset();
       this.router.navigateByUrl('/home');
     });
