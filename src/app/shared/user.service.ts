@@ -41,10 +41,12 @@ export class UserService {
   }
 
   getGames() {
+    // API call does not work
     return this.http.get(this.URI);
 }
 
   async postGame(gameState: string) {
+    // API CALL does not works
     let apiName = 'tictactoe';
     let path = this.URI;
     let myInit = {

@@ -16,6 +16,7 @@ Amplify.configure({
       userPoolId: 'us-east-1_qRdMI4QGp',
       userPoolWebClientId: '193l2qgeu9o51qpmboddhda5kk',
   },
+  // Not sure if this is correct
   API: {
     endpoints: [
       {
